@@ -1,6 +1,7 @@
-import java.util.*;
+
 package sem3.List_Iterator;
 
+import java.util.*;
 public class Iterator {
     public static void main(String[] args) {
 
@@ -15,4 +16,5 @@ public class Iterator {
         //     System.out.print(col.next() + " ");
         // }
         // System.out.println();
+        }
 }
