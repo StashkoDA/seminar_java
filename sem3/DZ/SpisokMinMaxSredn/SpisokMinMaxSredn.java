@@ -1,20 +1,39 @@
 package sem3.DZ.SpisokMinMaxSredn;
 //Задан целочисленный список ArrayList. Найти минимальное, максимальное и среднее арифметическое из этого списка. Collections.max()
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Iterator;
 public class SpisokMinMaxSredn {
     public static void main(String[] args) {
 
-        // Вывод списка вариант 1:
-        List<Integer> list = List.of(12, 100, 3, 55, 9, 77);
-        for (int i : list) { System.out.print(i + " "); }
-        System.out.println();
+        List<Integer> numbers = new ArrayList<Integer>(); // создаём список чисел
 
-        // Вывод списка вариант 2:
-        // Iterator<Integer> col = list.iterator();
-        // while (col.hasNext()) {
-        //     System.out.print(col.next() + " ");
-        // }
-        // System.out.println();
+        numbers.add(9);
+        numbers.add(14);
+        numbers.add(100);
+        numbers.add(33);
+        numbers.add(36);
+
+        System.out.println("List: " + numbers); // печать списка
+
+        Iterator<Integer> col = numbers.iterator();
+        double max = 0;
+        double sum = 0;
+        double size = numbers.size();
+        while (col.hasNext()) {
+            double numb = col.next();
+            if (numb > max) { max = numb; }
+            sum += numb;
+        }
+        double min = max;
+        Iterator<Integer> col2 = numbers.iterator();
+        while (col2.hasNext()) {
+            double numb = col2.next();
+            if (numb < min) { min = numb; }
+        }
+
+        double average = sum/size;
+        System.out.println("max = " + max + ", " + "min = " + min + ", " + "average = " + average);
     }
 }
