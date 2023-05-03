@@ -5,35 +5,45 @@ package sem4.DZ.Ochered_LinkedList;
 // first() - возвращает первый элемент из очереди, не удаляя.
 
 import java.util.*;
+// import java.util.Scanner;
+// import java.util.Arrays;
+// import java.util.LinkedList;
 public class Ochered_LinkedList {
     public static void main(String[] args) {
 
-        Queue<String> numb = new LinkedList<>();
-        numb.add("one");
-        numb.add("two");
-        numb.add("three");
-        numb.add("four");
-        numb.add("five");
-        System.out.println(numb);
+        LinkedList<Integer> ls = new LinkedList<>(Arrays.asList(1, 2, 3, 4, 5));
 
-        // Добавляем в конец очереди:
-        numb.offer("7");
-        System.out.println(numb);
-
-        // Возвращаем первый элемент из очереди и удаляем его:
-        System.out.println(numb.poll());
-        System.out.println(numb);
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Enter element: ");
+        enqueue(ls, sc.nextInt());
+        dequeue(ls);
+        first(ls);
         
-        // Возвращаем первый элемент из очереди и не удаляя его:
-        System.out.println(numb.peek());
-        System.out.println(numb);
+        
 
+
+        sc.close();
     }
 
-    // static void enqueue(String numb) {
-    //     numb.offer("8");
-    //     System.out.println(numb);
-    // }
+    static void enqueue(LinkedList<Integer> ls, int element) {
+        ls.add(element);
+        System.out.println("Queue with element added to the end: " + ls);
+    }
 
+    static int dequeue(LinkedList<Integer> ls) {
+        int m = ls.getFirst();
+        ls.removeFirst();
+        System.out.println("Output of the first element: " + m);
+        System.out.println("A queue with no first element: " + ls);
+        return m;
+    }
+
+    static int first(LinkedList<Integer> ls) {
+        int m = ls.getFirst();
+        System.out.println("Output of the first element: " + m);
+        System.out.println("Queue output: " + ls);
+        return m;
+    }
 }
+
 
