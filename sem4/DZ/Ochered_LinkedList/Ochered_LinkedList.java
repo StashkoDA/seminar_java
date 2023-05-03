@@ -5,9 +5,6 @@ package sem4.DZ.Ochered_LinkedList;
 // first() - возвращает первый элемент из очереди, не удаляя.
 
 import java.util.*;
-// import java.util.Scanner;
-// import java.util.Arrays;
-// import java.util.LinkedList;
 public class Ochered_LinkedList {
     public static void main(String[] args) {
 
@@ -18,10 +15,6 @@ public class Ochered_LinkedList {
         enqueue(ls, sc.nextInt());
         dequeue(ls);
         first(ls);
-        
-        
-
-
         sc.close();
     }
 
