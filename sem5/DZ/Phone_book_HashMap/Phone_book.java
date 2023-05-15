@@ -8,18 +8,20 @@ import java.util.*;
 
 public class Phone_book {
     public static void main(String[] args) {
-        // Map<String, List<String>> contact = new HashMap<>();
-        // List<String> list1 = new ArrayList<>();
-        // List<String> list2 = new ArrayList<>();
+        System.out.println("Добропожаловать в телефонную книгу!");
+        Map<String, List<String>> contact = new HashMap<>();
+        List<String> list1 = new ArrayList<>();
+        List<String> list2 = new ArrayList<>();
 
-        // // Заполним первично телефонную книгу:
-        // list1.add("123456");
-        // contact.put("Иванов", list1);
-        // list2.add("456789");
-        // list2.add("123789");
-        // contact.put("Петров", list2);
+        // Заполним первично телефонную книгу:
+        list1.add("123456");
+        contact.put("Иванов", list1);
+        list2.add("456789");
+        list2.add("123789");
+        contact.put("Петров", list2);
+        System.out.println(contact + "\n");
 
-        mainMenu();
+        mainMenu(contact);
     }
     
     static void addСontact(Map<String, List<String>> contact) {
@@ -30,14 +32,31 @@ public class Phone_book {
         System.out.println("Введите Имя контакта: ");
         String name = sc.nextLine();
         System.out.println("Введите количество номеров телефона: ");
-        int n = sc.nextInt();
-        for (int i = 1; i <= n; i++) {
-            System.out.println("Введите номер телефона " + i + ": ");
+        String n = sc.nextLine();
+        if (n.equals("1")) {
+            System.out.println("Введите номер телефона : ");
             String num = sc.nextLine();
             // добавим в список
             numbers.add(num);
+            contact.putIfAbsent(name, numbers);
         }
-        contact.putIfAbsent(name, numbers);
+        
+        if (n.equals("2")) {
+            System.out.println("Введите номер телефона № 1: ");
+            String num = sc.nextLine();
+            // добавим в список
+            numbers.add(num);
+            contact.putIfAbsent(name, numbers);
+
+            System.out.println("Введите номер телефона № 2: ");
+            String num2 = sc.nextLine();
+            // добавим в список
+            numbers.add(num2);
+            contact.putIfAbsent(name, numbers);
+        } else {
+            System.out.println("Можно сохранить не более двух номеров!");
+            addСontact(contact);
+        }
 
         System.out.println(contact); // посмотрим полученный список
         // или
@@ -49,8 +68,7 @@ public class Phone_book {
             stringBuilder.append("\n");
         }
         System.out.println(stringBuilder.toString());
-
-        sc.close();
+        //mainMenu(contact);
     }
 
     static void findAcontact(Map<String, List<String>> contact) {
@@ -62,29 +80,22 @@ public class Phone_book {
         for (Map.Entry<String, List<String>> entry: contact.entrySet()){
             if (entry.getKey().equalsIgnoreCase(name)){
                 stringBuilder.append(entry.getKey());
+                System.out.println(entry.getKey());
                 stringBuilder.append(": ");
                 stringBuilder.append(entry.getValue());
+                System.out.println(entry.getValue());
                 stringBuilder.append("\n");
             }
         }
-        System.out.println(stringBuilder.toString());
-        sc.close();
+        System.out.println(stringBuilder);
+        //mainMenu(contact);
     }
 
-    static void mainMenu() {
+    static void mainMenu(Map<String, List<String>> contact) {
 
-        Map<String, List<String>> contact = new HashMap<>();
-        List<String> list1 = new ArrayList<>();
-        List<String> list2 = new ArrayList<>();
+        
 
-        // Заполним первично телефонную книгу:
-        list1.add("123456");
-        contact.put("Иванов", list1);
-        list2.add("456789");
-        list2.add("123789");
-        contact.put("Петров", list2);
-
-        System.out.println("Добропожаловать в телефонную книгу!");
+        
         System.out.println("МЕНЮ:");
         System.out.println("1: Добавить контакт");
         System.out.println("2: Найти контакт");
@@ -92,23 +103,21 @@ public class Phone_book {
 
         Scanner sc = new Scanner(System.in);
         System.out.printf("Введите номер функции: ");
-        int numb = sc.nextInt();
+        String numb = sc.nextLine();
 
-        if (numb == 3) {
+        if (numb.equals("3")) {
             System.out.println("~ Спасибо за использование Телефонной книги! ~\n");
             sc.close();
             return;
         }
             
-        if (numb == 1) {
+        if (numb.equals("1")) {
             addСontact(contact);
-            mainMenu();
+            // mainMenu();
         }
-        if (numb == 2) {
+        if (numb.equals("2")) {
             findAcontact(contact);
-            mainMenu();
+            // mainMenu();
         }
-
-        sc.close();
     }
 }
