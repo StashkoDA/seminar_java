@@ -3,6 +3,9 @@ package sem5.DZ.Phone_book_HashMap;
 // Реализуйте структуру телефонной книги с помощью HashMap,
 // учитывая, что 1 человек может иметь несколько телефонов.
 // Нужны методы добавления новой записи в книгу и метод поиска записей в телефонной книге
+// Implement the phonebook structure with a HashMap,
+// given that 1 person can have multiple phones.
+// We need methods for adding a new entry to the book and a method for searching for entries in the phone book
 
 import java.util.*;
 
@@ -40,7 +43,7 @@ public class Phone_book {
         }
         contact.putIfAbsent(name, numbers);
 
-        System.out.println("\nВывод списка контактов в строку:\n" + contact); // вывод списка контактов в строку
+        System.out.println("\nOutputting a list of contacts to a string:\n Вывод списка контактов в строку:\n" + contact); // вывод списка контактов в строку
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<String, List<String>> entry: contact.entrySet()){
             stringBuilder.append(entry.getKey());
@@ -48,7 +51,7 @@ public class Phone_book {
             stringBuilder.append(entry.getValue());
             stringBuilder.append("\n");
         }
-        System.out.println("\nВывод списка контактов в столбик:\n" + stringBuilder.toString()); // вывод списка контактов в столбик
+        System.out.println("\nDisplaying a list of contacts in a column:\n Вывод списка контактов в столбик:\n" + stringBuilder.toString()); // вывод списка контактов в столбик
     }
 
     static void findContact(Map<String, List<String>> contact) {
@@ -69,8 +72,6 @@ public class Phone_book {
     }
 
     static void mainMenu(Map<String, List<String>> contact) {
-
-        
 
         System.out.println("\nMENU \n МЕНЮ");
         System.out.println("1: Add contact \n Добавить контакт");
