@@ -8,58 +8,39 @@ import java.util.*;
 
 public class Phone_book {
     public static void main(String[] args) {
-        System.out.println("Добропожаловать в телефонную книгу!");
+        System.out.println("\n~Welcome to the phone book!~ \n ~Добро пожаловать в телефонную книгу!~");
         Map<String, List<String>> contact = new HashMap<>();
         List<String> list1 = new ArrayList<>();
         List<String> list2 = new ArrayList<>();
 
-        // Заполним первично телефонную книгу:
         list1.add("123456");
-        contact.put("Иванов", list1);
+        contact.put("Ivanov", list1);
         list2.add("456789");
         list2.add("123789");
-        contact.put("Петров", list2);
-        System.out.println(contact + "\n");
+        contact.put("Petrov", list2);
 
         mainMenu(contact);
     }
-    
-    static void addСontact(Map<String, List<String>> contact) {
+
+    static void addContact(Map<String, List<String>> contact) {
+
         
         List<String> numbers = new ArrayList<>();
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Введите Имя контакта: ");
+        System.out.print("Enter last name: \n Введите фамилию: ");
         String name = sc.nextLine();
-        System.out.println("Введите количество номеров телефона: ");
-        String n = sc.nextLine();
-        if (n.equals("1")) {
-            System.out.println("Введите номер телефона : ");
+        System.out.print("Enter the number of phone numbers \n Введите количество номеров телефона: ");
+//        int n = sc.nextInt();
+        int n = Integer.parseInt(sc.nextLine());
+        for (int i = 1; i <= n; i++) {
+            System.out.print("Enter phone number № " + i + ": "  + "\n" + "Введите номер телефона № " + i + ": ");
             String num = sc.nextLine();
-            // добавим в список
             numbers.add(num);
-            contact.putIfAbsent(name, numbers);
         }
-        
-        if (n.equals("2")) {
-            System.out.println("Введите номер телефона № 1: ");
-            String num = sc.nextLine();
-            // добавим в список
-            numbers.add(num);
-            contact.putIfAbsent(name, numbers);
+        contact.putIfAbsent(name, numbers);
 
-            System.out.println("Введите номер телефона № 2: ");
-            String num2 = sc.nextLine();
-            // добавим в список
-            numbers.add(num2);
-            contact.putIfAbsent(name, numbers);
-        } else {
-            System.out.println("Можно сохранить не более двух номеров!");
-            addСontact(contact);
-        }
-
-        System.out.println(contact); // посмотрим полученный список
-        // или
+        System.out.println("\nВывод списка контактов в строку:\n" + contact); // вывод списка контактов в строку
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<String, List<String>> entry: contact.entrySet()){
             stringBuilder.append(entry.getKey());
@@ -67,57 +48,52 @@ public class Phone_book {
             stringBuilder.append(entry.getValue());
             stringBuilder.append("\n");
         }
-        System.out.println(stringBuilder.toString());
-        //mainMenu(contact);
+        System.out.println("\nВывод списка контактов в столбик:\n" + stringBuilder.toString()); // вывод списка контактов в столбик
     }
 
-    static void findAcontact(Map<String, List<String>> contact) {
+    static void findContact(Map<String, List<String>> contact) {
 
         Scanner sc = new Scanner(System.in);
-        System.out.println("Введите Имя контакта: ");
+        System.out.print("Enter last name: \n Введите фамилию: ");
         String name = sc.nextLine();
         StringBuilder stringBuilder = new StringBuilder();
         for (Map.Entry<String, List<String>> entry: contact.entrySet()){
             if (entry.getKey().equalsIgnoreCase(name)){
                 stringBuilder.append(entry.getKey());
-                System.out.println(entry.getKey());
                 stringBuilder.append(": ");
                 stringBuilder.append(entry.getValue());
-                System.out.println(entry.getValue());
                 stringBuilder.append("\n");
             }
         }
-        System.out.println(stringBuilder);
-        //mainMenu(contact);
+        System.out.println(stringBuilder.toString());
     }
 
     static void mainMenu(Map<String, List<String>> contact) {
 
         
 
-        
-        System.out.println("МЕНЮ:");
-        System.out.println("1: Добавить контакт");
-        System.out.println("2: Найти контакт");
-        System.out.println("3: Выход");
+        System.out.println("\nMENU \n МЕНЮ");
+        System.out.println("1: Add contact \n Добавить контакт");
+        System.out.println("2: Find a contact \n Найти контакт");
+        System.out.println("3: Exit \n Выход");
+        System.out.print("Select function number: \n Выберите номер функции: ");
 
         Scanner sc = new Scanner(System.in);
-        System.out.printf("Введите номер функции: ");
-        String numb = sc.nextLine();
+        int numb = sc.nextInt();
 
-        if (numb.equals("3")) {
-            System.out.println("~ Спасибо за использование Телефонной книги! ~\n");
+        if (numb == 3) {
+            System.out.println("\n~Thanks for using the phone book!~\n ~Спасибо за использование телефонного справочника!~\n");
             sc.close();
             return;
         }
-            
-        if (numb.equals("1")) {
-            addСontact(contact);
-            // mainMenu();
+
+        if (numb == 1) {
+            addContact(contact);
+            mainMenu(contact);
         }
-        if (numb.equals("2")) {
-            findAcontact(contact);
-            // mainMenu();
+        if (numb == 2) {
+            findContact(contact);
+            mainMenu(contact);
         }
     }
 }
