@@ -61,9 +61,9 @@ public class Noutbuk {
         System.out.println("\n ~Добро пожаловать в магазин техники!~");
         Noutbuk nout1 = new Noutbuk(2, 128, "Linux", "White", "China");
         Noutbuk nout2 = new Noutbuk(4, 256, "Windows", "Grey", "USA");
-        Noutbuk nout3 = new Noutbuk(6, 500, "Ubuntu", "black", "Great Britain");
-        Noutbuk nout4 = new Noutbuk(8, 750, "Fedora", "blue", "Japan");
-        Noutbuk nout5 = new Noutbuk(16, 500, "Solaris", "gold", "Indonesia");
+        Noutbuk nout3 = new Noutbuk(6, 500, "Linux", "Black", "Great Britain");
+        Noutbuk nout4 = new Noutbuk(8, 750, "Windows", "Blue", "Japan");
+        Noutbuk nout5 = new Noutbuk(16, 500, "Linux", "Gold", "Indonesia");
 
         System.out.println("\nПеречень ноутбуков:");
         System.out.println(nout1);
@@ -95,15 +95,13 @@ public class Noutbuk {
 
         Scanner sc = new Scanner(System.in);
         String numb = sc.nextLine();
-        if (numb == "6") {
+        if (numb.equals("6")) {
             System.out.println("\n ~Рады были помочь!~\n");
             sc.close();
             return;
-        }
-
-        Map<String, String> variation = new HashMap<>(); // создаём перечень требуемых критериев
+        } else {
         
-        if (numb != "6") {
+            Map<String, String> variation = new HashMap<>(); // создаём перечень требуемых критериев
             for (int i = 0; i < numb.length(); i++) {
                 if (numb.charAt(i) == '1') {
                     System.out.print("Введите минимальный критерий osu: ");
@@ -134,9 +132,9 @@ public class Noutbuk {
             System.out.println("Перечень критериев:\n" + variation);
 
             System.out.println();
-            // Удалим по критериям из списка nouts не подходяшие компьютеры:
+            // Произведём выборку по критериям из списка nouts подходяшие компьютеры:
             for (Noutbuk nout: nouts){
-                int count = 1;
+                int count = 0;
                 for (Map.Entry<String, String> entry: variation.entrySet()){
                     if (entry.getKey().equalsIgnoreCase("osu")) {
                         if (nout.getOsu() < Integer.parseInt(entry.getValue())) {
@@ -157,13 +155,13 @@ public class Noutbuk {
                         count++;
                     }
                     if (entry.getKey().equalsIgnoreCase("color")) {
-                        if (!(nout.getOs().equalsIgnoreCase(entry.getValue()))) {
+                        if (!(nout.getColor().equalsIgnoreCase(entry.getValue()))) {
                             break;
                         }
                         count++;
                     }
                     if (entry.getKey().equalsIgnoreCase("madeIn")) {
-                        if (!(nout.getOs().equalsIgnoreCase(entry.getValue()))) {
+                        if (!(nout.getMadeIn().equalsIgnoreCase(entry.getValue()))) {
                             break;
                         }
                         count++;
