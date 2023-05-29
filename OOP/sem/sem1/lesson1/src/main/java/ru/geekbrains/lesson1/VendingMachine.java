@@ -22,4 +22,15 @@ public class VendingMachine {
         return null;
     }
 
+    public Chocolate getChocolate(int kilocalories) {
+        for (Product product : products){
+            if (product instanceof Chocolate){
+                if (((Chocolate)product).getKilocalories()  == kilocalories){
+                    return (Chocolate) product;
+                }
+            }
+        }
+        return null;
+    }
+
 }

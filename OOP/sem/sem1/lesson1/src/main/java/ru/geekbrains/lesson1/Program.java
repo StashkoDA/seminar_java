@@ -28,13 +28,24 @@ public class Program {
         Product bottleOfMilk1 = new BottleOfMilk("ООО Чистый источник", "Бутылка с молоком", 115, 1.5, 10);
         System.out.println(bottleOfMilk1.displayInfo());
 
+        // Добавляю новые продукты: Шоколад
+        Chocolate chocolate1 = new Chocolate("ООО Сластёна", "Пётр I", 350.5, 285);
+        System.out.println(chocolate1.displayInfo());
+        Chocolate chocolate2 = new Chocolate("ООО Буратино", "Базилио", 290.8, 300);
+        Chocolate chocolate3 = new Chocolate("ООО Каспер", "Принц", 130.1, 375);
+        System.out.println();
+
         List<Product> products = new ArrayList<>();
         products.add(bottleOfWater1);
         products.add(bottleOfWater2);
         products.add(bottleOfMilk1);
         products.add(bottleOfWater4);
         products.add(bottleOfWater3);
+        products.add(chocolate1);
+        products.add(chocolate2);
+        products.add(chocolate3);
 
+        // Покупка Бутылки воды 2 литра:
         VendingMachine vendingMachine = new VendingMachine(products);
         BottleOfWater bottleOfWaterResult = vendingMachine.getBottleOfWater(2);
         if (bottleOfWaterResult != null){
@@ -43,6 +54,16 @@ public class Program {
         }
         else {
             System.out.println("Такой бутылки с водой нет в автомате.");
+        }
+
+        //Покупка Шоколада 300 килокалорий:
+        Chocolate chocolateResult = vendingMachine.getChocolate(300);
+        if (chocolateResult != null){
+            System.out.println("Вы купили: ");
+            System.out.println(chocolateResult.displayInfo());
+        }
+        else {
+            System.out.println("Такого шоколада нет в автомате.");
         }
     }
 
