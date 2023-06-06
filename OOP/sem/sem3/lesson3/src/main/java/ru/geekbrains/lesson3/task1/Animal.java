@@ -36,18 +36,20 @@ public abstract class Animal {
         return id;
     }
 
+    // Статический инициализатор:
     static {
         System.out.println("Static Initializer");
-        identifier = 2000;
+        identifier = 2000; // Задаём исходник ID
     }
 
+    // Обычный инициализатор:
     {
         System.out.println("Initializer");
-        name = "Животное";
+        name = "Животное"; // Задаём значения полей по умолчанию
         maxRun = 10;
         maxSwim = 10;
-        id = ++identifier;
-        counter++;
+        id = ++identifier; // Задание номера ID для каждого животного
+        counter++; // Подсчёт количества животных
     }
 
     public Animal(String name, int maxSwim, int maxRun) {
