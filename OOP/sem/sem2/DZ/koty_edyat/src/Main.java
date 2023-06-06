@@ -3,7 +3,7 @@ import java.util.List;
 
 public class Main {
     public static void main(String[] args) {
-        Cat cat1 = new Cat("Barsik", 5, false);
+        Cat cat1 = new Cat("Барсик", 5, false);
         Cat cat2 = new Cat("Марыся", 10, false);
         Cat cat3 = new Cat("Брюс", 15, false);
         Cat cat4 = new Cat("Муся", 10, false);
@@ -27,6 +27,9 @@ public class Main {
                 plate.info();
             } else {
                 plate.addition(plate, cat);
+                cat.eat();
+                plate.setFood(plate.getFood() - cat.getAppetite());
+                plate.info();
             }
 
         }

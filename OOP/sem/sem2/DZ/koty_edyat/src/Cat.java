@@ -24,7 +24,9 @@ public class Cat {
         if (!satiety) {
             System.out.printf("%s покушал(а) в обёме: %d\n", name, appetite);
             return true;
+        } else {
+            return false;
         }
-        return false;
+
     }
 }
