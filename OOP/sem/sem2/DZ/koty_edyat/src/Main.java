@@ -21,7 +21,7 @@ public class Main {
 
     static void processEat(List<Cat> cats, Plate plate) {
         for (Cat cat: cats) {
-            if (plate.getFood() > cat.getAppetite()) {
+            if (plate.getFood() >= cat.getAppetite()) {
                 cat.eat();
                 plate.setFood(plate.getFood() - cat.getAppetite());
                 plate.info();
