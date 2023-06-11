@@ -13,12 +13,21 @@ public class Program {
      *  метод должен генерировать рабочих (Employee) разных типов.
      * @return
      */
-    static Worker generateEmployee(){
+    static Employee generateEmployee(int i){
         String[] names = new String[] { "Анатолий", "Глеб", "Клим", "Мартин", "Лазарь", "Владлен", "Клим", "Панкратий", "Рубен", "Герман" };
         String[] surnames = new String[] { "Григорьев", "Фокин", "Шестаков", "Хохлов", "Шубин", "Бирюков", "Копылов", "Горбунов", "Лыткин", "Соколов" };
+        int age = random.nextInt(18, 60);
+        if (i % 2 == 0){
+            int salary = random.nextInt(20000, 80000);
+            return new Worker(names[random.nextInt(10)], surnames[random.nextInt(surnames.length)], age, salary);
 
-        int salary = random.nextInt(20000, 80000);
-        return new Worker(names[random.nextInt(2)], surnames[random.nextInt(surnames.length)], salary);
+        } else {
+            int coefficient = 500;
+            int days = random.nextInt(10, 20);
+            int salary = 8*days*coefficient;
+            return new Freelancer(names[random.nextInt(10)], surnames[random.nextInt(surnames.length)], age, salary);
+
+        }
     }
 
 
@@ -33,17 +42,30 @@ public class Program {
         Employee[] employees = new Employee[10];
         for (int i = 0; i < employees.length; i++)
         {
-            employees[i] = generateEmployee();
+            employees[i] = generateEmployee(i);
         }
 
-        Arrays.sort(employees);
+        // Сортировка по имени:
+        // System.out.println("Cортировка по имени: ");
+//        Arrays.sort(employees);
+//
+//        for (Employee employee: employees) {
+//            System.out.println(employee);
+//        }
 
+//        // или сортировка по зарплате через компоратор:
+//        System.out.println("Cортировка по зарплате: ");
+//        Arrays.sort(employees, new SalaryComparator());
+//        for (Employee employee: employees) {
+//            System.out.println(employee);
+//        }
+
+        // или сортировка по возрасту через компоратор:
+        System.out.println("Cортировка по возрасту: ");
+        Arrays.sort(employees, new AgeComporator());
         for (Employee employee: employees) {
             System.out.println(employee);
         }
-
-
-
     }
 
 }

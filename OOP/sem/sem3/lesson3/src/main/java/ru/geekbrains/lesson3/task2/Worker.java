@@ -1,9 +1,12 @@
 package ru.geekbrains.lesson3.task2;
 
-public class Worker extends Employee {
+import java.util.Random;
 
-    public Worker(String name, String surname, double salary) {
-        super(name, surname, salary);
+public class Worker extends Employee {
+    static Random random = new Random();
+
+    public Worker(String name, String surname, int age, double salary) {
+        super(name, surname, age, salary);
     }
 
     @Override
@@ -13,7 +16,7 @@ public class Worker extends Employee {
 
     @Override
     public String toString() {
-        return String.format("%s %s; Рабочий; Среднемесячная заработная плата (фиксированная месячная оплата): %.2f (руб.)",
-                surname, name, calculateSalary());
+        return String.format("%s %s - %d (лет); Рабочий; Среднемесячная заработная плата (фиксированная месячная оплата): %.2f (руб.)",
+                surname, name, age, calculateSalary());
     }
 }
