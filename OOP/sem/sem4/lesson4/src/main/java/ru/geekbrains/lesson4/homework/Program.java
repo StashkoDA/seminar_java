@@ -34,6 +34,8 @@ public class Program {
 
         box1.getWeight();
         box2.getWeight();
+
+
     }
 
 //    static void getWeight(Box<Apple> box1,Box<Orange> box2) {
