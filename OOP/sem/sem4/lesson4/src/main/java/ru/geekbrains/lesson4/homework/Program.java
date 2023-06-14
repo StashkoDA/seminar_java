@@ -32,9 +32,9 @@ public class Program {
         box2.getWeight();
     }
 
-    static void getWeight(Box<Apple> box1,Box<Orange> box2) {
-        System.out.println("Вес коробки яблок: " + apple.getWeight()*apples.size());
-        System.out.println("Вес коробки апельсинов: " + orange.getWeight()*oranges.size());
-    }
+//    static void getWeight(Box<Apple> box1,Box<Orange> box2) {
+//        System.out.println("Вес коробки яблок: " + apple.getWeight()*apples.size());
+//        System.out.println("Вес коробки апельсинов: " + orange.getWeight()*oranges.size());
+//    }
 
 }

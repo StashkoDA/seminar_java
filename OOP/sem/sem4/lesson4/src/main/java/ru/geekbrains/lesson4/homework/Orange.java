@@ -1,12 +1,12 @@
 package ru.geekbrains.lesson4.homework;
 
 public class Orange extends Fruit {
-    private String name;
+    private String orange;
     private float weight;
 
     @Override
-    public String getName() {
-        return name;
+    public String getOrange() {
+        return orange;
     }
 
     @Override
@@ -14,7 +14,7 @@ public class Orange extends Fruit {
         return weight;
     }
 
-    public Orange(String name, float weight) {
-        super(name, 1.5f);
+    public Orange(String orange, float weight) {
+        super(orange, 1.5f);
     }
 }

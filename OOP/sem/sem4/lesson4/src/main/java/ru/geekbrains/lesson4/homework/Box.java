@@ -6,6 +6,14 @@ import java.util.List;
 public class Box <T extends Fruit>{
     private List<T> container = new ArrayList<>();
 
+    public List<T> getContainer() {
+        return container;
+    }
+
+    public void setContainer(List<T> container) {
+        this.container = container;
+    }
+
     public Box(List<T> container) {
         this.container = container;
     }
@@ -13,8 +21,9 @@ public class Box <T extends Fruit>{
         container.add(fruit);
     }
     public int compare(Box<T extends Fruit> other);
-    static void getWeight() {
-
+    public void getWeight() {
+        float weight = Fruit.getWeight() * container.size();
+        System.out.println("");
     }
 
 
