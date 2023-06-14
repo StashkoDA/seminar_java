@@ -24,9 +24,13 @@ public class Program {
      g. Не забываем про метод добавления фрукта в коробку.
      */
     public static void main(String[] args) {
-        Box<Apple> box1 = new Box<>();
-        Box<Orange> box2 = new Box<>();
+        Box<Apple> box1 = new Box<>("apple");
+        box1.addFruit(new Apple("apple1", 1.0f));
+        box1.addFruit(new Apple("apple2", 1.0f));
 
+        Box<Orange> box2 = new Box<>("orange");
+        box2.addFruit(new Orange("orange1", 1.5f));
+        box2.addFruit(new Orange("orange2", 1.5f));
 
         box1.getWeight();
         box2.getWeight();

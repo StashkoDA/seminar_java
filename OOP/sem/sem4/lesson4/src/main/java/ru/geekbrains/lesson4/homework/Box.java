@@ -15,6 +15,11 @@ public class Box <T extends Fruit>{
     }
     public void addFruit(T fruit) {         // добавление фруктов
         container.add(fruit);
+    }
+    public void getWeight() {
+        float weight = container.get(0).getWeight() * container.size();
+        System.out.println("Вес коробки с " + name + ": " + weight);
+    }
 
 
 //    public List<T> getContainer() {
@@ -31,8 +36,5 @@ public class Box <T extends Fruit>{
 
 //    }
 //    public int compare(Box<T extends Fruit> other);
-//    public void getWeight() {
-//        float weight = Fruit.getWeight() * container.size();
-//        System.out.println("");
-//    }
+//
 }
