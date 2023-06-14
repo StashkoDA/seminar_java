@@ -4,36 +4,35 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Box <T extends Fruit>{
-    private List<T> container = new ArrayList<>();
+    List<T> container;
+    private String name;
 
-    public List<T> getContainer() {
-        return container;
-    }
+    public Box(String name) {
+        this.container = new ArrayList<>();
+        this.name = name;
+        System.out.printf("\n  >>  %s created\n",this.name);
 
-    public void setContainer(List<T> container) {
-        this.container = container;
     }
-
-    public Box(List<T> container) {
-        this.container = container;
-    }
-    public void addFruit(T fruit) {
+    public void addFruit(T fruit) {         // добавление фруктов
         container.add(fruit);
-    }
-    public int compare(Box<T extends Fruit> other);
-    public void getWeight() {
-        float weight = Fruit.getWeight() * container.size();
-        System.out.println("");
-    }
 
 
-    //    private ArrayList<T> fruits;
-//
-//    public ArrayList<T> getFruits() {
-//        return fruits;
+//    public List<T> getContainer() {
+//        return container;
 //    }
 //
-//    public Box(ArrayList<T> fruits) {
-//        this.fruits = fruits;
+//    public void setContainer(List<T> container) {
+//        this.container = container;
+//    }
+
+//    public Box(List<T> container) {
+//        this.container = container;
+//    }
+
+//    }
+//    public int compare(Box<T extends Fruit> other);
+//    public void getWeight() {
+//        float weight = Fruit.getWeight() * container.size();
+//        System.out.println("");
 //    }
 }
