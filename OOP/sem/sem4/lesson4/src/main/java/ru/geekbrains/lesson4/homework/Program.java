@@ -24,17 +24,15 @@ public class Program {
      g. Не забываем про метод добавления фрукта в коробку.
      */
     public static void main(String[] args) {
-        Apple apple = new Apple(1.0f);
-        Orange orange = new Orange(1.5f);
-        List<BoxApple> apples = new ArrayList<>();
-        for (BoxApple apple1: apples) {
+        Box<Apple> box1 = new Box<>();
+        Box<Orange> box2 = new Box<>();
 
-        }
-        List<BoxOrange> oranges = new ArrayList<>();
-        getWeight(apples, apple, oranges, orange);
+
+        box1.getWeight();
+        box2.getWeight();
     }
 
-    static void getWeight(List<BoxApple> apples, Apple apple, List<BoxOrange> oranges, Orange orange) {
+    static void getWeight(Box<Apple> box1,Box<Orange> box2) {
         System.out.println("Вес коробки яблок: " + apple.getWeight()*apples.size());
         System.out.println("Вес коробки апельсинов: " + orange.getWeight()*oranges.size());
     }
