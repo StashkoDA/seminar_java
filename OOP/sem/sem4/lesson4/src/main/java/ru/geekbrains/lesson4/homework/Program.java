@@ -35,12 +35,8 @@ public class Program {
         box1.getWeight();
         box2.getWeight();
 
-
+        //compare(box1, box2);
     }
 
-//    static void getWeight(Box<Apple> box1,Box<Orange> box2) {
-//        System.out.println("Вес коробки яблок: " + apple.getWeight()*apples.size());
-//        System.out.println("Вес коробки апельсинов: " + orange.getWeight()*oranges.size());
-//    }
 
 }

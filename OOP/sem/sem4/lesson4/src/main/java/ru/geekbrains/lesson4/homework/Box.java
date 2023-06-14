@@ -11,8 +11,13 @@ public class Box <T extends Fruit>{
         this.container = new ArrayList<>();
         this.name = name;
         System.out.printf("\n  >>  %s created\n",this.name);
-
     }
+
+    @Override
+    public String toString() {
+        return name;
+    }
+
     public void addFruit(T fruit) {         // добавление фруктов
         container.add(fruit);
     }
