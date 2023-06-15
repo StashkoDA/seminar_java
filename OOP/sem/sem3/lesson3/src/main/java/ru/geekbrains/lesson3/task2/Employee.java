@@ -50,7 +50,7 @@ public abstract class Employee implements Comparable<Employee> {
 
 
     @Override
-    public int compareTo(Employee o) {    // сортировка по зарплате через компоратор 'AgeComporator'
+    public int compareTo(Employee o) {    // сортировка по имени
         int res = name.compareTo(o.name);
         if (res == 0){
             return Double.compare(age, o.age);

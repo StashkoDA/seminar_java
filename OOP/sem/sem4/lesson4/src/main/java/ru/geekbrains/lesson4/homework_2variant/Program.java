@@ -1,7 +1,6 @@
-package ru.geekbrains.lesson4.homework;
+package ru.geekbrains.lesson4.homework_2variant;
 
 import java.util.*;
-
 public class Program {
 
     /**
@@ -23,29 +22,51 @@ public class Program {
      g. Не забываем про метод добавления фрукта в коробку.
      */
     public static void main(String[] args) {
-        Box<Apple> box1 = new Box<>("apple");
-        box1.addFruit(new Apple("apple1", 1.0f));
-        box1.addFruit(new Apple("apple2", 1.0f));
+        System.out.println("\n*** Фрукты ***\n");
 
-        Box<Apple> box11 = new Box<>("apple11");
-        box11.addFruit(new Apple("apple1", 1.0f));
-        box11.addFruit(new Apple("apple2", 1.0f));
-        box11.addFruit(new Apple("apple2", 1.0f));
+        // Создадим коробку с 3 яблоками внутри
+        Box<Apple> appleBox1 = new Box<>(
+                new Apple(),
+                new Apple(),
+                new Apple()
+        );
 
-        Box<Orange> box2 = new Box<>("orange");
-        box2.addFruit(new Orange("orange1", 1.5f));
-        box2.addFruit(new Orange("orange2", 1.5f));
+        // Создадим коробку с 500 яблоками внутри
+        Box<Apple> appleBox2 = new Box<>();
+        for (int i = 0; i < 500; i++) {
+            appleBox2.add(new Apple());
+        }
 
-        box1.PrintGetWeight();
-        box11.PrintGetWeight();
-        box2.PrintGetWeight();
+        // Создадим коробку с 2 апельсинами внутри
+        Box<Orange> orangeBox1 = new Box<>(
+                new Orange(),
+                new Orange()
+        );
 
-        box1.compare(box2);
+        // Создадим коробку с 500 апельсинами внутри
+        Box<Orange> orangeBox2 = new Box<>();
+        for (int i = 0; i < 500; i++) {
+            orangeBox2.add(new Orange());
+        }
+
+        // Отобразим общий вес фруктов по коробкам:
+        System.out.println("Вес коробки 1 с яблоками: " + appleBox1.getWeight());
+        System.out.println("Вес коробки 2 с яблоками: " + appleBox2.getWeight());
+        System.out.println("Вес коробки 1 с апельсинами: " + orangeBox1.getWeight());
+        System.out.println("Вес коробки 2 с апельсинами: " + orangeBox2.getWeight());
+        System.out.println();
+
+        // Сравнение веса коробок:
+        System.out.println("Больше ли вес коробки 1 с яблоками (true - больше или равны): " + appleBox1.compare(orangeBox1));
+
         // Переложим фрукты из одной коробки в другую:
-        box1.replaceAll(box11);
+        orangeBox1.replaceAll(orangeBox2);
         // Результаты сортировки фруктов:
-        // НЕ СЧИТАЕТ С ПУСТОТОЙ System.out.println("Вес коробки 1 с яблоками после перекладки: " + box1.getWeight());
-        System.out.println("Вес коробки 11 с яблоками после перекладки: " + box11.getWeight());
+        System.out.println("Вес коробки 1 с яблоками после перекладки: " + orangeBox1.getWeight());
+        System.out.println("Вес коробки 2 с яблоками после перекладки: " + orangeBox2.getWeight());
+
+        //#endregion
+
     }
 
 
