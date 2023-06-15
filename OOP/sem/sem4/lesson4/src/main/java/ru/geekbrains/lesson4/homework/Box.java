@@ -22,13 +22,21 @@ public class Box <T extends Fruit>{
         container.add(fruit);
     }
     public float getWeight() {
-        float weight = container.get(0).getWeight() * container.size();
-        return weight;
+        if (container.size() == 0) {
+            return 0;
+        } else {
+            float weight = container.get(0).getWeight() * container.size();
+            return weight;
+        }
     }
     public float PrintGetWeight() {
-        float weight = container.size() * container.get(0).getWeight();
-        System.out.println("Вес коробки с " + name + ": " + weight);
-        return weight;
+        if (container.size() == 0) {
+            return 0;
+        } else {
+            float weight = container.size() * container.get(0).getWeight();
+            System.out.println("Вес коробки с " + name + ": " + weight);
+            return weight;
+        }
     }
 
     public boolean compare(Box <? extends Fruit> other) {

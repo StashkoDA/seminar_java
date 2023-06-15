@@ -44,8 +44,9 @@ public class Program {
         // Переложим фрукты из одной коробки в другую:
         box1.replaceAll(box11);
         // Результаты сортировки фруктов:
-        // НЕ СЧИТАЕТ С ПУСТОТОЙ System.out.println("Вес коробки 1 с яблоками после перекладки: " + box1.getWeight());
-        System.out.println("Вес коробки 11 с яблоками после перекладки: " + box11.getWeight());
+
+            System.out.println("Вес коробки 1 с яблоками после перекладки: " + box1.getWeight());
+            System.out.println("Вес коробки 11 с яблоками после перекладки: " + box11.getWeight());
     }
 
 
