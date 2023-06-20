@@ -21,6 +21,6 @@ public interface View {
     void printReservationTableResult(int reservationNo);
 
     void printReservationTableError(String errorMessage);
-    void printPenReservationTableResult(int reservationId);
+    void printPenReservationTableResult(int reservationNo);
 
 }
