@@ -8,4 +8,5 @@ public interface ViewObserver {    // Наблюдатель за предста
 
     // кто-то захотел перерезервировать столик:
     void penReservationTable(int oldReservation, Date reservationDate, int tableNo, String name);
+
 }

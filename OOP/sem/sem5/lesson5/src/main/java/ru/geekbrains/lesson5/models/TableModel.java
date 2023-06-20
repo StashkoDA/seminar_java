@@ -12,6 +12,7 @@ public class TableModel implements Model {
     private Collection<Table> tables;
 
 
+
     /**
      * Получить все столики
      * @return
@@ -49,12 +50,19 @@ public class TableModel implements Model {
         throw new RuntimeException("Некорректный номер столика.");
     }
 
-    @Override
-    public int chchangeReservationTable(int oldReservation, Date reservationDate, int tableNo, String name) {
-        table.removeReserv(oldReservation);
 
-        BookingView bookingView = new BookingView();
-        bookingView.reservationTable(reservationDate, tableNo, name);
+    public int changeReservationTable(int oldReservation, Date reservationDate, int tableNo, String name) {
+
+        for (Table table: tables){
+            System.out.println("Отменена бронь: " + oldReservation);
+            for (Reservation reservation: table.getReservations()){
+                if (reservation.getId() == oldReservation)
+                    table.getReservations().remove(oldReservation);
+                System.out.println("Отменена бронь: " + oldReservation);
+            }
+            throw new RuntimeException("Некорректный номер брони.");
+        }
+        reservationTable(reservationDate, tableNo, name);
         return 0;
     }
 
@@ -62,14 +70,7 @@ public class TableModel implements Model {
      * TODO: Разработать самостоятельно в рамках домашней работы
      * Поменять бронь столика
      */
-    public int changeReservationTable(int oldReservation, Date reservationDate, int tableNo, String name) {
-        table.removeReserv(oldReservation);
 
-        BookingView bookingView = new BookingView();
-        bookingView.reservationTable(reservationDate, tableNo, name);
-        return 0;
-    }
-        //...
         //TODO: Для создания новой брони, можно воспользоваться уже существующим методом reservationTable
 }
 

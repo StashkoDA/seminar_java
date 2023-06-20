@@ -7,7 +7,7 @@ import ru.geekbrains.lesson5.views.BookingView;
 import java.util.Collection;
 import java.util.Date;
 
-public class BookingPresenter implements ViewObserver {
+public class BookingPresenter implements ViewObserver { // Класс печати ответов на запросы в консоль
 
     private final Model tableModel;
     private final View bookingView;
@@ -29,7 +29,7 @@ public class BookingPresenter implements ViewObserver {
         bookingView.printReservationTableResult(reservationId);
     }
     public void printPenReservationTableResult(int reservationId) {
-        bookingView.printReservationTableResult(reservationId);
+        bookingView.printPenReservationTableResult(reservationId);
     }
 
     public void printReservationTableError(String errorMessage){
@@ -53,7 +53,7 @@ public class BookingPresenter implements ViewObserver {
     public void penReservationTable(int oldReservation, Date reservationDate, int tableNo, String name) {
         try
         {
-            int reservationId = tableModel.chchangeReservationTable(oldReservation, reservationDate, tableNo, name);
+            int reservationId = tableModel.reservationTable(reservationDate, tableNo, name);
             printPenReservationTableResult(reservationId);
         }
         catch (RuntimeException e){

@@ -32,7 +32,7 @@ public class Table {
         for (Reservation reservation: reservations){
             if (reservation.getId() == id) {
                 reservations.remove(reservation);
-                System.out.println("Бронь удалена" + id);
+                System.out.println("Отменена бронь: " + id);
             }
         }
         throw new RuntimeException("Некорректный номер брони.");

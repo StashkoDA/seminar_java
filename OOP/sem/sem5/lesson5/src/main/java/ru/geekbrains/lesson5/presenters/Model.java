@@ -15,6 +15,7 @@ public interface Model {
      * @param name Имя клиента
      */
     int reservationTable(Date reservationDate, int tableNo, String name);
-    int chchangeReservationTable(int oldReservation, Date reservationDate, int tableNo, String name);
+    int changeReservationTable(int oldReservation, Date reservationDate, int tableNo, String name);
+
 
 }
