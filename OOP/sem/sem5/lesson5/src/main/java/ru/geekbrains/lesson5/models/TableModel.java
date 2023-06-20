@@ -52,18 +52,17 @@ public class TableModel implements Model {
 
 
     public int changeReservationTable(int oldReservation, Date reservationDate, int tableNo, String name) {
-
+        reservationTable(reservationDate, tableNo, name);
         for (Table table: tables){
-            System.out.println("Отменена бронь: " + oldReservation);
             for (Reservation reservation: table.getReservations()){
                 if (reservation.getId() == oldReservation)
                     table.getReservations().remove(oldReservation);
-                System.out.println("Отменена бронь: " + oldReservation);
+                    System.out.println("Отменена бронь: " + oldReservation);
             }
-            throw new RuntimeException("Некорректный номер брони.");
+
         }
-        reservationTable(reservationDate, tableNo, name);
-        return 0;
+
+        throw new RuntimeException("Некорректный номер брони.");
     }
 
     /**
