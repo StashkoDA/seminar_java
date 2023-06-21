@@ -58,14 +58,14 @@ public class TableModel implements Model {
                 if (reservation.getId() == oldReservation) {
                     table.getReservations().remove(oldReservation);
                     System.out.println("Отменена бронь: #" + oldReservation);
-                    //reservationTable(reservationDate, tableNo, name);
+                    return reservationTable(reservationDate, tableNo, name);
                 }
 
             }
 
         }
-
-        return 0;
+        throw new RuntimeException("Некорректный номер брони.");
+        //return reservationTable(reservationDate, tableNo, name);
 
     }
 

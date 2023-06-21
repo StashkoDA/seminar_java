@@ -53,8 +53,7 @@ public class BookingPresenter implements ViewObserver { // Класс печат
     public void penReservationTable(int oldReservation, Date reservationDate, int tableNo, String name) {
         try
         {
-            tableModel.changeReservationTable(oldReservation, reservationDate, tableNo, name);
-            int reservationId = tableModel.reservationTable(reservationDate, tableNo, name);
+            int reservationId = tableModel.changeReservationTable(oldReservation, reservationDate, tableNo, name);
             printPenReservationTableResult(reservationId);
 
         }

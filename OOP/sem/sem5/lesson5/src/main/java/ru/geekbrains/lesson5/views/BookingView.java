@@ -57,7 +57,6 @@ public class BookingView implements View {
      */
     public void changeReservationTable(int oldReservation, Date reservationDate, int tableNo, String name){
         observer.penReservationTable(oldReservation, reservationDate, tableNo, name);
-        //observer.onReservationTable(reservationDate, tableNo, name);
     }
 
 }
