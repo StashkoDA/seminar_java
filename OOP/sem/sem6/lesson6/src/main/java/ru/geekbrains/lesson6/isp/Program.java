@@ -12,7 +12,7 @@ public class Program {
         paymentServices.add(new InternetPaymentService());
 
         for (PaymentService paymentService : paymentServices){
-            if (paymentService instanceof PhonePayable)
+            if (paymentService instanceof PhonePayable)         // проверяем возможна ли оплата по номеру телефона
                 ((PhonePayable)paymentService).payPhoneNumber(300);
             break;
         }

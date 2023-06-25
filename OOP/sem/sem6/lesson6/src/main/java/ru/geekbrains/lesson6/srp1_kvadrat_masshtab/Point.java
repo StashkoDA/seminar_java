@@ -1,4 +1,4 @@
-package ru.geekbrains.lesson6.srp1;
+package ru.geekbrains.lesson6.srp1_kvadrat_masshtab;
 
 public class Point {
 

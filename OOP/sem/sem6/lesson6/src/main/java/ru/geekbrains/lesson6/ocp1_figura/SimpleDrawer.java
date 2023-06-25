@@ -1,5 +1,8 @@
-package ru.geekbrains.lesson6.ocp1;
+package ru.geekbrains.lesson6.ocp1_figura;
 
+/**
+ * Отрисовка фигуры в общем
+ */
 public class SimpleDrawer {
 
     public void draw(Shape shape){

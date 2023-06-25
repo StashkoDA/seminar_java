@@ -1,4 +1,4 @@
-package ru.geekbrains.lesson6.ocp1;
+package ru.geekbrains.lesson6.ocp1_figura;
 
 public enum ShapeType {
 

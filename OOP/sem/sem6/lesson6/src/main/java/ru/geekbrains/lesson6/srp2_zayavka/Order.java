@@ -1,16 +1,15 @@
-package ru.geekbrains.lesson6.srp2;
+package ru.geekbrains.lesson6.srp2_zayavka;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.util.Scanner;
 
 public class Order {
 
     private Scanner scanner = new Scanner(System.in);
+
     private String clientName;
     private String product;
-    private int qnt;
-    private int price;
+    private int qnt; // Кол-во
+    private int price; // Цена
 
     public String getClientName() {
         return clientName;
@@ -28,9 +27,6 @@ public class Order {
         return price;
     }
 
-    public Order(){
-
-    }
 
     public Order(String clientName, String product, int qnt, int price) {
         this.clientName = clientName;
@@ -39,7 +35,11 @@ public class Order {
         this.price = price;
     }
 
+    /**
+     * Метод запросов инф-ции
+     */
     public void inputFromConsole(){
+
         clientName = prompt("Имя клиента: ");
         product = prompt("Продукт: ");
         qnt = Integer.parseInt(prompt("Кол-во: "));
@@ -50,21 +50,4 @@ public class Order {
         System.out.println(message);
         return scanner.nextLine();
     }
-
-    public void saveToJson() {
-        String fileName = "order.json";
-        try (FileWriter writer = new FileWriter(fileName, false)) {
-            writer.write("{\n");
-            writer.write("\"clientName\":\""+ clientName + "\",\n");
-            writer.write("\"product\":\""+product+"\",\n");
-            writer.write("\"qnt\":"+qnt+",\n");
-            writer.write("\"price\":"+price+"\n");
-            writer.write("}\n");
-            writer.flush();
-        } catch (IOException ex) {
-            System.out.println(ex.getMessage());
-        }
-    }
-
-
 }

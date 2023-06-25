@@ -1,4 +1,4 @@
-package ru.geekbrains.lesson6.lsp1;
+package ru.geekbrains.lesson6.lsp1_ptici;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -35,8 +35,8 @@ public class Program {
      * P
      * @param birds
      */
-    public static void processFly(List<Bird> birds){
-        for (Bird bird: birds) {
+    public static void processFly(List<Bird> birds){ // Проверяем умеет ли летать птица из списка,
+        for (Bird bird: birds) {                     // если да, то запускаем в полёт
             if (bird.isCanFly())
                 bird.fly();
         }
@@ -47,15 +47,15 @@ public class Program {
 /**
  * T
  */
-class Bird{
+class Bird{     // Птица
 
-    private boolean canFly;
+    private boolean canFly; // Умение летать
 
     public boolean isCanFly() {
         return canFly;
     }
 
-    private int flySpeed = 10;
+    private int flySpeed = 10;  // Скорость полёта
 
     public Bird(boolean canFly) {
         this.canFly = canFly;
@@ -65,6 +65,9 @@ class Bird{
         return flySpeed;
     }
 
+    /**
+     * Метод запуска птицы в полёт
+     */
     public void fly() {
         System.out.printf("Птица летит со скоростью %d км/ч\n", flySpeed);
     }
@@ -73,7 +76,7 @@ class Bird{
 /**
  * S
  */
-class Duck extends Bird{
+class Duck extends Bird{ // Утка
 
 
     public Duck() {
@@ -86,7 +89,7 @@ class Duck extends Bird{
     }
 }
 
-class Penguin extends Bird{
+class Penguin extends Bird{ // Пингвин
 
     public Penguin() {
         super(false);

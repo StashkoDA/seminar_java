@@ -1,15 +1,37 @@
-package ru.geekbrains.lesson6.srp1;
+package ru.geekbrains.lesson6.srp1_kvadrat_masshtab;
 
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Задаём параметры квадрата
+ * @Square
+ */
 public class Square {
 
+    /**
+     * Исходная точка
+     * @points
+     */
     private List<Point> points;
 
+    /**
+     * длина стороны квадрата
+     * @side
+     */
     private int side;
+
+    /**
+     * Масштаб отображения
+     * @scale
+     */
     private int scale;
 
+    /**
+     * Задаём координаты точки квадрата
+     * @param point1
+     * @param side
+     */
     public Square(Point point1, int side) {
         this.side = side;
 
@@ -33,6 +55,10 @@ public class Square {
         return points;
     }
 
+    /**
+     * Площадь квадрата
+     * @return
+     */
     public int getArea(){
         return side * side;
     }
