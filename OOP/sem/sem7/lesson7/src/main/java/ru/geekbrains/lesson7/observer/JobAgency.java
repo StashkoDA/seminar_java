@@ -19,9 +19,11 @@ public class JobAgency implements Publisher {   // Агентство по по�
     }
 
     @Override
-    public void sendOffer(String companyName, double salary) {      // Отправка вакансии
+    public void sendOffer(String companyName, JobVacancy jobVacancy, double salary) {      // Отправка вакансии
         for (Observer observer: observers) {
-            observer.receiveOffer(companyName, salary);
+            observer.receiveOffer(companyName, jobVacancy, salary);
         }
     }
+
+
 }

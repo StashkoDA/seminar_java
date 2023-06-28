@@ -1,9 +1,12 @@
 package ru.geekbrains.lesson7.observer;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class Company {
 
+    List<JobVacancy> jobVacancies = new ArrayList<>();
     private static  Random random = new Random();
     private String companyName;
     private  double maxSalary;
@@ -17,9 +20,16 @@ public class Company {
         this.jobAgency = jobAgency;
     }
 
+    public void getVacancyAgency(JobVacancy jobVacancy) {
+        jobVacancies.add(jobVacancy);
+    }
+
     public void needEmployee(){     // Компании нужен сотрудник (генерируем вакансию)
-        double salary = random.nextDouble(3000, maxSalary);
-        jobAgency.sendOffer(companyName, salary);
+        for (JobVacancy jobVacancy: jobVacancies) {
+            double salary = random.nextDouble(3000, maxSalary);
+            jobAgency.sendOffer(companyName, jobVacancy, salary);
+        }
+
     }
 
 

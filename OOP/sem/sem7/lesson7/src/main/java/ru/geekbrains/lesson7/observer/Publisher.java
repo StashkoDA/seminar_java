@@ -20,6 +20,6 @@ public interface Publisher {    // Интерфейс для взаимодей�
      * @param companyName
      * @param salary
      */
-    void sendOffer(String companyName, double salary);
+    void sendOffer(String companyName, JobVacancy jobVacancy, double salary);
 
 }

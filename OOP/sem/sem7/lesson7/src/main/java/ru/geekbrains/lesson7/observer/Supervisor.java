@@ -4,32 +4,32 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Master implements Observer {
+public class Supervisor implements Observer{
 
-    List<JobVacancy> jobVacancyMasters = new ArrayList<>();
+    List<JobVacancy> jobVacancySupervisors = new ArrayList<>();
     private static Random random = new Random();
 
     private Publisher jobAgency;
     private String name;
     private double minSalary;
 
-    public Master(Publisher jobAgency, String name) {
+    public Supervisor(Publisher jobAgency, String name) {
         this.jobAgency = jobAgency;
         this.name = name;
-        minSalary = random.nextDouble(60000, 80000);
+        minSalary = random.nextDouble(80000, 120000);
     }
 
     @Override
     public void receiveOffer(String companyName, JobVacancy jobVacancy, double salary) {
-        for (JobVacancy jobVacancy1: jobVacancyMasters) {
+        for (JobVacancy jobVacancy1: jobVacancySupervisors) {
             if (minSalary <= salary && jobVacancy1 == jobVacancy){
-                System.out.printf("Рабочий %s (%f) >>> Мне нужна эта работа %s! [%s - %f]\n",
+                System.out.printf("Руководитель %s (%f) >>> Мне нужна эта работа %s! [%s - %f]\n",
                         name, minSalary, jobVacancy.getNameVacancy(), companyName, salary);
                 minSalary = salary;
                 leaveAgency();
             }
             else {
-                System.out.printf("Рабочий %s >>> Я найду работу получше (%f)! [%s - %f]\n",
+                System.out.printf("Руководитель %s >>> Я найду работу получше (%f)! [%s - %f]\n",
                         name, minSalary, companyName, salary);
             }
         }
@@ -44,6 +44,6 @@ public class Master implements Observer {
 
     @Override
     public void getVacancy(JobVacancy jobVacancy) {
-        jobVacancyMasters.add(jobVacancy);
+        jobVacancySupervisors.add(jobVacancy);
     }
 }
