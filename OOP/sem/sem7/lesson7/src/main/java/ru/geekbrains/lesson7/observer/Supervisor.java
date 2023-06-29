@@ -26,20 +26,14 @@ public class Supervisor implements Observer{
                 System.out.printf("Руководитель %s (%f) >>> Мне нужна эта работа %s! [%s - %f]\n",
                         name, minSalary, jobVacancy.getNameVacancy(), companyName, salary);
                 minSalary = salary;
-                leaveAgency();
+                System.out.printf("Руководитель %s >>> Я отказываюсь от услуг агентства\n", name);
+                //jobAgency.removeObserver(name);
             }
             else {
                 System.out.printf("Руководитель %s >>> Я найду работу получше (%f)! [%s - %f]\n",
                         name, minSalary, companyName, salary);
             }
         }
-    }
-
-    @Override
-    public void leaveAgency() {
-        System.out.printf("Студент %s >>> Я отказываюсь от услуг агентства %s\n",
-                name, jobAgency);
-        //jobAgency.removeObserver();
     }
 
     @Override

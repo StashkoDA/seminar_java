@@ -6,12 +6,16 @@ import java.util.Random;
 
 public class Student implements Observer {
 
-    List<JobVacancy> jobVacancyStudent = new ArrayList<>();
+    List<JobVacancy> jobVacancyStudents = new ArrayList<>();
 
     private static Random random = new Random();
     private Publisher jobAgency;
     private String name;
     private double minSalary;
+
+    public String getName() {
+        return name;
+    }
 
     public Student(Publisher jobAgency, String name) {
         this.jobAgency = jobAgency;
@@ -20,25 +24,19 @@ public class Student implements Observer {
     }
 
     @Override
-    public void leaveAgency() {
-        System.out.printf("Студент %s >>> Я отказываюсь от услуг агентства %s\n",
-                name, jobAgency);
-        //jobAgency.removeObserver(jobVacancyStudent);
-    }
-
-    @Override
     public void getVacancy(JobVacancy jobVacancy) {
-        jobVacancyStudent.add(jobVacancy);
+        jobVacancyStudents.add(jobVacancy);
     }
 
     @Override
     public void receiveOffer(String companyName, JobVacancy jobVacancy, double salary) {
-        for (JobVacancy jobVacancy1: jobVacancyStudent) {
+        for (JobVacancy jobVacancy1: jobVacancyStudents) {
             if (minSalary <= salary && jobVacancy1 == jobVacancy){
                 System.out.printf("Студент %s (%f) >>> Мне нужна эта работа %s! [%s - %f]\n",
                         name, minSalary, jobVacancy.getNameVacancy(), companyName, salary);
                 minSalary = salary;
-                leaveAgency();
+                System.out.printf("Студент %s >>> Я отказываюсь от услуг агентства\n", name);
+                //.removeObserver();
             }
             else {
                 System.out.printf("Студент %s >>> Я найду работу получше (%f)! [%s - %f]\n",

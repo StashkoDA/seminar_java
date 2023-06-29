@@ -26,20 +26,14 @@ public class Master implements Observer {
                 System.out.printf("Рабочий %s (%f) >>> Мне нужна эта работа %s! [%s - %f]\n",
                         name, minSalary, jobVacancy.getNameVacancy(), companyName, salary);
                 minSalary = salary;
-                leaveAgency();
+                System.out.printf("Рабочий %s >>> Я отказываюсь от услуг агентства\n", name);
+                //jobAgency.removeObserver();
             }
             else {
                 System.out.printf("Рабочий %s >>> Я найду работу получше (%f)! [%s - %f]\n",
                         name, minSalary, companyName, salary);
             }
         }
-    }
-
-    @Override
-    public void leaveAgency() {
-        System.out.printf("Студент %s >>> Я отказываюсь от услуг агентства %s\n",
-                name, jobAgency);
-        //jobAgency.removeObserver();
     }
 
     @Override

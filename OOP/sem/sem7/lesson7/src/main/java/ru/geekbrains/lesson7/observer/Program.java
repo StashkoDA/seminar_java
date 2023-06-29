@@ -13,7 +13,7 @@ public class Program {
 
         JobAgency jobAgency = new JobAgency();
 
-        JobVacancy programmer = new JobVacancy("Programmer");
+        JobVacancy programmer = new JobVacancy("Programmer"); // задаём варианты вакансий
         JobVacancy tester = new JobVacancy("Tester");
         JobVacancy director = new JobVacancy("Director");
 
@@ -21,8 +21,8 @@ public class Program {
         Company google = new Company("Google", 100000, jobAgency);
         Company yandex = new Company("Yandex", 120000, jobAgency);
 
-        Master ivanov = new Master(jobAgency,"Ivanov");
-        ivanov.getVacancy(programmer);
+        Master ivanov = new Master(jobAgency,"Ivanov");     // Создаём работника
+        ivanov.getVacancy(programmer);                          // Желаемая вакансия соискателя в коллекцию
         Master petrov = new Master(jobAgency,"Petrov");
         petrov.getVacancy(programmer);
         Student sidorov = new Student(jobAgency, "Sidorov");
@@ -30,12 +30,12 @@ public class Program {
         Supervisor krasnov = new Supervisor(jobAgency,"Krasnov");
         krasnov.getVacancy(director);
 
-        jobAgency.registerObserver(ivanov);
+        jobAgency.registerObserver(ivanov); // Регистрируем соискателя в агентстве
         jobAgency.registerObserver(petrov);
         jobAgency.registerObserver(sidorov);
         jobAgency.registerObserver(krasnov);
 
-        geekBrains.getVacancyAgency(programmer);
+        geekBrains.getVacancyAgency(programmer); // Компании создают вакансии для заявки в агентство
         google.getVacancyAgency(tester);
         yandex.getVacancyAgency(director);
 
