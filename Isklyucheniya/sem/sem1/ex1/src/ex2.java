@@ -12,8 +12,11 @@
 //значение и покажет читаемый результат пользователю. Например, если вернулся -2,
 //пользователю выведется сообщение: “Искомый элемент не найден”.
 
-public class Main {
-    public static void main(String[] args) {
+import java.util.Scanner;
+
+public class ex2 {
+    Scanner sc = new Scanner(System.in);
+    public int ex2 () {
         int[] arr = new int[3];
         System.out.println(getLength(arr, 2));
     }
