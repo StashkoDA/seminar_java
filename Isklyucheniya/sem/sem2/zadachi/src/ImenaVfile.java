@@ -14,7 +14,7 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Main {
+public class ImenaVfile {
     public static void main(String[] args) {
         // адрес файла:
         String patch = "D:\\МИТЯ\\ГикБрейн\\Разработчик\\Java\\seminar_java\\Isklyucheniya\\sem\\sem2\\imenaVfile\\src\\names.txt";
