@@ -1,17 +1,33 @@
-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
-// then press Enter. You can now see whitespace characters in your code.
+//Создайте класс Счетчик, у которого есть метод add(), увеличивающий
+//значение внутренней int переменной на 1.Сделайте так, чтобы с объектом
+//такого типа можно было работать в блоке try-with-resources. Нужно бросить
+//исключение, если работа с объектом типа счетчик была не в ресурсном try
+//и/или ресурс остался открыт. Подумайте какой тип исключения подойдет
+//лучше всего.
+
+import java.io.IOException;
+
 public class Main {
     public static void main(String[] args) {
-        // Press Alt+Enter with your caret at the highlighted text to see how
-        // IntelliJ IDEA suggests fixing it.
-        System.out.printf("Hello and welcome!");
-
-        // Press Shift+F10 or click the green arrow button in the gutter to run the code.
-        for (int i = 1; i <= 5; i++) {
-
-            // Press Shift+F9 to start debugging your code. We have set one breakpoint
-            // for you, but you can always add more by pressing Ctrl+F8.
-            System.out.println("i = " + i);
+        try (TryWithResources count = new TryWithResources(0)){
+            count.add(); // Проверяем, что всё работает, запуская метод
+            count.add();
+            count.add();
+            System.out.println(count.getCounter()); // Печатаем полученный count
+            count.close(); // закрываем экземпляр (вводим значение null)
+            count.getCounter(); // Вызовем метод, чтобы выскочила ошибка после получения null
+        } catch (IOException e) {
+            System.out.println(e.getMessage());
         }
     }
+        // Или без try+catch, и тогда программную ошибка с показом её происхождения, но не напечает count:
+//    public static void main(String[] args) throws IOException{
+//        TryWithResources count = new TryWithResources(0);
+//        count.add(); // Проверяем, что всё работает, запуская метод
+//        count.add();
+//        count.add();
+//        System.out.println(count.getCounter()); // Печатаем полученный count
+//        count.close(); // закрываем экземпляр (вводим значение null)
+//        count.getCounter(); // Вызовем метод, чтобы выскочила ошибка после получения null
+//    }
 }
