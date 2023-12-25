@@ -20,7 +20,7 @@ public class Ex4_Array {
                 try {
                     sum += Integer.parseInt(i);
                 } catch (NumberFormatException e) {
-                    throw new MyArraySizeException();
+                    throw new MyArrayDataException();
                 }
             }
         }
