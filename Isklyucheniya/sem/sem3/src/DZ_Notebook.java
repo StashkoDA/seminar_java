@@ -17,45 +17,99 @@
 //Не забудьте закрыть соединение с файлом.
 //При возникновении проблемы с чтением-записью в файл, исключение должно быть корректно обработано,
 //пользователь должен увидеть стектрейс ошибки.
-import java.util.Scanner;
-import java.io.FileWriter;
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Scanner;
+import java.util.zip.DataFormatException;
 
 public class DZ_Notebook {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+        System.out.println("Записная книжка ");
+        Scanner in = new Scanner(System.in);
+        System.out.println("Введите через пробел: фамилию, дату рождения (формата dd.mm.yyyy)," +
+                "номер телефона (формат 89991112233), пол (формат f или m): ");
+        String data = in.nextLine();
+        System.out.println(data);
+        options(data);
+        errorOptions(data);
+    }
 
-        System.out.print("Введите данные (Фамилия Имя Отчество дата рождения номер телефона пол): ");
-        String input = scanner.nextLine();
+    public static void options(String data) {
 
-        String[] data = input.split(" ");
-
-        if (data.length != 6) {
-            System.out.println("Ошибка! Введено неверное количество данных.");
-            return;
-        }
+        String[] els = data.split(" ");
 
         try {
-            String surname = data[0];
-            String firstName = data[1];
-            String middleName = data[2];
-            String birthDate = data[3];
-            String phoneNumber = data[4];
-            String gender = data[5];
+            if (els.length == 6) {
+                System.out.println("Введено нужное количство параметров: " + els.length);
+                return;
+            } else if (els.length < 6) {
+                System.out.println("Введено недостаточное количство параметров: меньше " + els.length);
+                String el = els[5];
+            } else {
+                System.out.println("Введено избыточное количство параметров: больше " + els.length);
+                String el = els[els.length];
+            }
+        }catch (ArrayIndexOutOfBoundsException e) {
+            System.out.println("Повторите попытку.");
+            }
 
-            String output = surname + firstName + middleName + birthDate + " " + phoneNumber + gender;
+    }
 
-            FileWriter fileWriter = new FileWriter(surname + ".txt");
-            fileWriter.write(output);
-            fileWriter.close();
-        } catch (IOException e) {
-            System.out.println("Ошибка! Не удалось создать файл.");
-            return;
-        } catch (ArrayIndexOutOfBoundsException e) {
-            System.out.println("Ошибка! Введены неполные данные.");
-            return;
+        public static String[] errorOptions(String data)  {
+        String[] els = data.split(" ");
+        String[] res = new String[4];
+        SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
+        SimpleDateFormat formatForDateNow = new SimpleDateFormat("yyyy.MM.dd");
+
+
+
+        Date etalonMin = new Date(1900,01,01);
+        String etalonMin2 = formatForDateNow.format(etalonMin);
+        System.out.println(etalonMin2);
+        Date etalonMax = new Date(2023,12,01);
+        int count = 0;
+        for (String el: els) {
+            if (el == "f" || el == "m") {
+                res[3] = el;
+            }
+
+            try {
+                if ((el.length() == 11) && !el.matches("^[a-zA-Z]*$")) {
+                    Integer.parseInt(el);
+                    res[2] = el;
+                } else if (!el.matches("^[a-zA-Z]*$")){
+                    Integer.parseInt(el);
+                    res[2] = el;
+                    System.out.println("Номер телефона возможно введён с ошибкой.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Номер телефона введён с ошибкой.");
+                return els;
+            }
+
+            try {
+                Date elPars = ft.parse(el);
+                //System.out.println(elPars);
+                if (elPars.compareTo(etalonMin) > 0 && elPars.compareTo(etalonMax) < 0) { // сравниваем дату с разрешённым диапазоном
+                    res[1] = el;
+                } else {
+                    System.out.println("Ошибка в дате");
+                }
+            } catch (ParseException e) {
+                System.out.println("Ошибка при вводе даты");
+                return els;
+            }
+
+            if (!el.matches("^[a-zA-Z]*$")){
+                while (count < 3) {
+                    res[count] = el;
+                }
+                count++;
+            }
         }
-
-        System.out.println("Данные успешно сохранены в файле " + data[0] + ".txt");
+        return res;
     }
 }
