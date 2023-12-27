@@ -36,7 +36,7 @@ public class DZ_Notebook {
         String data = in.nextLine();
         System.out.println(data);
         options(data);
-        System.out.print(errorOptions(data));
+        errorOptions(data);
     }
 
     public static void options(String data) {
@@ -68,54 +68,44 @@ public class DZ_Notebook {
 
         int count = 0;
 
-        for (String el: els) {
+        try {
+            for (String el : els) {
 
-            // Проверяем правльность ввода гендера:
-            if (el == "f" || el == "m") {
-                res[5] = el;
-            } else if ((el.length() == 1) && (!el.equals("f")) && !(el.equals("m"))) {
-                System.out.println("Введён не правильно гендер");
-            }
-
-
-            try {
-                String[] elData = el.split("."); // Преобразуем дату в массив строк для анализа
-
-                if (el.matches("\\d{12}")) { // Проверяем номер телефона:
-                    parseInt(el);
-                    res[4] = el;
-                    break;
-                } else if (el.length() != 11 && el.matches("\\d*")){
-                    parseInt(el);
-                    res[4] = el;
-                    System.out.println("Номер телефона возможно введён с ошибкой.");
-                    break;
-                }
-
-                else if (el.matches("\\d{1,2}\\.\\d{1,2}\\.\\d{4}")){
+                // Проверяем правльность ввода гендера:
+                if (el.matches("^[a-zA-Z]*$")){ // Проверяем ФИО
+                    res[count] = el;
+                    count++;
+                } else if ((el.length() == 1) && (!el.equals("f")) && !(el.equals("m"))) {
+                    System.out.println("Введён не правильно гендер");
+                } else if (el.matches("\\d{1,2}\\.\\d{1,2}\\.\\d{4}")) {
                     Date elPars = ft.parse(el);
                     System.out.println(elPars);
-                    if
-                    //((1900 + elPars.getYear()) >= 1900 && (1900 + elPars.getYear()) <= 2023)
-                    (elPars.compareTo(etalonMin) > 0 && elPars.compareTo(etalonMax) < 0)
+                    if ((1900 + elPars.getYear()) >= 1900 && (1900 + elPars.getYear()) <= 2023)
+                    //(elPars.compareTo(etalonMin) > 0 && elPars.compareTo(etalonMax) < 0)
                     { // сравниваем дату с разрешённым диапазоном
                         res[3] = el;
                     } else {
                         System.out.println("Ошибка в дате");
                     }
+                } else if (el.length() == 11 && el.matches("[0-9]+")) { // Проверяем номер телефона:
+                    parseInt(el);
+                    res[4] = el;
+                } else if (el.length() != 11 && el.matches("[0-9]+")) {
+                    parseInt(el);
+                    res[4] = el;
+                    System.out.println("Номер телефона возможно введён с ошибкой.");
+                } else if (el.equals("f") || el.equals("m")) {
+                    res[5] = el;
                 }
-            } catch (NumberFormatException e) {
-                System.out.println("Номер телефона введён с ошибкой.");
-            } catch (ParseException e) {
-                System.out.println("Ошибка при вводе даты");
             }
 
-
-            // Проверяем ФИО
-            if (el.matches("^[a-zA-Z]*$")){
-                res[count] = el;
-                count++;
-            }
+        } catch (NumberFormatException e) {
+            System.out.println("Номер телефона введён с ошибкой.");
+        } catch (ParseException e) {
+            System.out.println("Ошибка при вводе даты");
+        }
+        for (String r: res) { // Печатаю принятые параметры
+            System.out.print(r + " ");
         }
         return res;
     }
