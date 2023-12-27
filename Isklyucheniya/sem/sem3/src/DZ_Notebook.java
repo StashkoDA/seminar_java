@@ -51,6 +51,8 @@ public class DZ_Notebook {
     private static void getFile(String output, String name) {
         try {
             FileWriter fileWriter = new FileWriter((name.split(" "))[0] + ".txt");
+            fileWriter.write(output);
+            fileWriter.close();
 
         } catch (IOException e) {
             System.out.println("Ошибка! Не удалось создать файл.");
