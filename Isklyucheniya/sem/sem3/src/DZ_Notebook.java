@@ -17,6 +17,7 @@
 //Не забудьте закрыть соединение с файлом.
 //При возникновении проблемы с чтением-записью в файл, исключение должно быть корректно обработано,
 //пользователь должен увидеть стектрейс ошибки.
+import java.io.FileWriter;
 import java.io.IOException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -35,78 +36,166 @@ public class DZ_Notebook {
                 "номер телефона (формат 89991112233), пол (формат f или m): ");
         String data = in.nextLine();
         System.out.println(data);
-        options(data);
-        errorOptions(data);
+        String[] els = data.split(" ");
+        options(els);
+        String name = getName(els);
+        String date = getDate(els);
+        String tel = getTel(els);
+        String gender = getGender(els);
+        String output = name + date + " " + tel + " " + gender;
+        getFile(output, name);
+        System.out.println(output);
+//        errorOptions(data);
     }
 
-    public static void options(String data) {
+    private static void getFile(String output, String name) {
+        try {
+            FileWriter fileWriter = new FileWriter((name.split(" "))[0] + ".txt");
 
-        String[] els = data.split(" ");
+        } catch (IOException e) {
+            System.out.println("Ошибка! Не удалось создать файл.");
+        }
+        System.out.println("Данные успешно сохранены в файле " + (name.split(" "))[0] + ".txt");
+    }
+
+    public static void options(String[] els) {
 
         try {
             if (els.length == 6) {
                 System.out.println("Введено нужное количество параметров: " + els.length);
             } else if (els.length < 6) {
                 System.out.println("Введено недостаточное количество параметров: меньше 6");
-                String e = els[5];
+                String el = els[5];
             } else {
                 System.out.println("Введено избыточное количество параметров: больше 6");
-                String e = els[els.length];
+                String el = els[els.length];
             }
         }catch (ArrayIndexOutOfBoundsException e) {
             System.out.println("Повторите попытку.");
             }
     }
 
-    public static String[] errorOptions(String data)  {
-        String[] els = data.split(" ");
-        String[] res = new String[6];
-        SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
+//    public static String[] errorOptions(String data)  {
+//        String[] els = data.split(" ");
+//        String[] res = new String[6];
+//        SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
+//
+//        Date etalonMin = new Date(1900,01,01);
+//        Date etalonMax = new Date(2023,12,01);
+//
+//        int count = 0;
+//
+//        try {
+//            for (String el : els) {
+//
+//                // Проверяем правльность ввода гендера:
+//                if (el.matches("^[a-zA-Z]*$")){ // Проверяем ФИО
+//                    res[count] = el;
+//                    count++;
+//                } else if (el.matches("\\d{1,2}\\.\\d{1,2}\\.\\d{4}")) {
+//                    Date elPars = ft.parse(el);
+//                    System.out.println(elPars);
+//                    if ((1900 + elPars.getYear()) >= 1900 && (1900 + elPars.getYear()) <= 2023)
+//                    //(elPars.compareTo(etalonMin) > 0 && elPars.compareTo(etalonMax) < 0)
+//                    { // сравниваем дату с разрешённым диапазоном
+//                        res[3] = el;
+//                    } else {
+//                        System.out.println("Ошибка в дате");
+//                    }
+//                } else if (el.length() == 11 && el.matches("[0-9]+")) { // Проверяем номер телефона:
+//                    parseInt(el);
+//                    res[4] = el;
+//                } else if (el.length() != 11 && el.matches("[0-9]+")) {
+//                    parseInt(el);
+//                    res[4] = el;
+//                    System.out.println("Номер телефона возможно введён с ошибкой.");
+//                } else if (el.equals("f") || el.equals("m")) {
+//                    res[5] = el;
+//                }else if ((el.length() == 1) && (!el.equals("f")) && !(el.equals("m"))) {
+//                    System.out.println("Введён не правильно гендер");
+//                }
+//            }
+//
+//        } catch (NumberFormatException e) {
+//            System.out.println("Номер телефона введён с ошибкой.");
+//        } catch (ParseException e) {
+//            System.out.println("Ошибка при вводе даты");
+//        }
+//        for (String r: res) { // Печатаю принятые параметры
+//            System.out.print(r + " ");
+//        }
+//        return res;
+//    }
 
+    public static String getName (String[] els) {
+        String resName = "";
+        int count = 0;
+        for (String el : els) {
+            // Проверяем правльность ввода гендера:
+            if (el.matches("^[a-zA-Z]*$")){ // Проверяем ФИО
+                resName += el + " ";
+                count++;
+            }
+        }
+        return resName;
+    }
+
+    public static String getDate(String[] els) { // Проверяем дату:
+        SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
+        String resDate = "";
         Date etalonMin = new Date(1900,01,01);
         Date etalonMax = new Date(2023,12,01);
-
-        int count = 0;
-
         try {
             for (String el : els) {
-
-                // Проверяем правльность ввода гендера:
-                if (el.matches("^[a-zA-Z]*$")){ // Проверяем ФИО
-                    res[count] = el;
-                    count++;
-                } else if ((el.length() == 1) && (!el.equals("f")) && !(el.equals("m"))) {
-                    System.out.println("Введён не правильно гендер");
-                } else if (el.matches("\\d{1,2}\\.\\d{1,2}\\.\\d{4}")) {
+                if (el.matches("\\d{1,2}\\.\\d{1,2}\\.\\d{4}")) {
                     Date elPars = ft.parse(el);
                     System.out.println(elPars);
                     if ((1900 + elPars.getYear()) >= 1900 && (1900 + elPars.getYear()) <= 2023)
                     //(elPars.compareTo(etalonMin) > 0 && elPars.compareTo(etalonMax) < 0)
                     { // сравниваем дату с разрешённым диапазоном
-                        res[3] = el;
+                        resDate = el;
                     } else {
                         System.out.println("Ошибка в дате");
+                        return null;
                     }
-                } else if (el.length() == 11 && el.matches("[0-9]+")) { // Проверяем номер телефона:
-                    parseInt(el);
-                    res[4] = el;
-                } else if (el.length() != 11 && el.matches("[0-9]+")) {
-                    parseInt(el);
-                    res[4] = el;
-                    System.out.println("Номер телефона возможно введён с ошибкой.");
-                } else if (el.equals("f") || el.equals("m")) {
-                    res[5] = el;
                 }
             }
-
-        } catch (NumberFormatException e) {
-            System.out.println("Номер телефона введён с ошибкой.");
         } catch (ParseException e) {
             System.out.println("Ошибка при вводе даты");
+            return null;
         }
-        for (String r: res) { // Печатаю принятые параметры
-            System.out.print(r + " ");
+        return resDate;
+    }
+
+    private static String getTel(String[] els) { // Проверяем номер телефона:
+        String resTel = "";
+        try {
+            for (String el : els) {
+                if (el.length() == 11 && el.matches("[0-9]+")) {
+                    parseInt(el);
+                    resTel = el;
+                } else if (el.length() != 11 && el.matches("[0-9]+")) {
+                    parseInt(el);
+                    resTel = el;
+                    System.out.println("Номер телефона возможно введён с ошибкой.");
+                }
+            }
+        } catch (NumberFormatException e) {
+            System.out.println("Номер телефона введён с ошибкой.");
         }
-        return res;
+        return resTel;
+    }
+
+    private static String getGender(String[] els) {
+        String resGender = "";
+            for (String el : els) {
+                if (el.equals("f") || el.equals("m")) {
+                    resGender = el;
+                }else if ((el.length() == 1) && (!el.equals("f")) && !(el.equals("m"))) {
+                    System.out.println("Введён не правильно гендер");
+                    return null;
+                }
+            }
+        return resGender;
     }
 }
