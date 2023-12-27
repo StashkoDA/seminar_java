@@ -32,7 +32,7 @@ public class DZ_Notebook {
     public static void main(String[] args) {
         System.out.println("Записная книжка ");
         Scanner in = new Scanner(System.in);
-        System.out.println("Введите через пробел: фамилию, дату рождения (формата dd.mm.yyyy)," +
+        System.out.println("Введите через пробел на ЛАТИННИЦЕ: фамилию, дату рождения (формата dd.mm.yyyy)," +
                 "номер телефона (формат 89991112233), пол (формат f или m): ");
         String data = in.nextLine();
         System.out.println(data);
@@ -49,15 +49,33 @@ public class DZ_Notebook {
     }
 
     private static void getFile(String output, String name) {
+        String[] els = output.split(" ");
+        int count = 6;
         try {
-            FileWriter fileWriter = new FileWriter((name.split(" "))[0] + ".txt");
-            fileWriter.write(output);
-            fileWriter.close();
-
+            for (String el: els) {
+                if (el != "") {
+                    count--;
+                    if (count == 0) {
+                        FileWriter fileWriter = new FileWriter((name.split(" "))[0] + ".txt");
+                        fileWriter.write(output);
+                        fileWriter.close();
+                        System.out.println("Данные успешно сохранены в файле " + (name.split(" "))[0] + ".txt");
+                    }
+                }
+                if (el == null) {
+//                    FileWriter fileWriter = new FileWriter((el.split(" "))[0] + ".aaa");
+//                    fileWriter.write(output);
+//                    fileWriter.close();
+                    System.out.println("Ошибка! Не удалось создать файл." +
+                            "Не все параметры внесены правильно, повторите ввод.");
+                    break;
+                }
+            }
         } catch (IOException e) {
-            System.out.println("Ошибка! Не удалось создать файл.");
+            System.out.println("Ошибка! Не удалось создать файл." +
+                    "Не все параметры внесены правильно, повторите ввод.");
         }
-        System.out.println("Данные успешно сохранены в файле " + (name.split(" "))[0] + ".txt");
+
     }
 
     public static void options(String[] els) {
@@ -90,7 +108,6 @@ public class DZ_Notebook {
 //        try {
 //            for (String el : els) {
 //
-//                // Проверяем правльность ввода гендера:
 //                if (el.matches("^[a-zA-Z]*$")){ // Проверяем ФИО
 //                    res[count] = el;
 //                    count++;
@@ -129,14 +146,12 @@ public class DZ_Notebook {
 //        return res;
 //    }
 
-    public static String getName (String[] els) {
+    public static String getName (String[] els) { // Проверяем ФИО
         String resName = "";
-        int count = 0;
+
         for (String el : els) {
-            // Проверяем правльность ввода гендера:
-            if (el.matches("^[a-zA-Z]*$")){ // Проверяем ФИО
+            if (el.length() > 1 && el.matches("[A-Za-z]+")){
                 resName += el + " ";
-                count++;
             }
         }
         return resName;
@@ -158,32 +173,26 @@ public class DZ_Notebook {
                         resDate = el;
                     } else {
                         System.out.println("Ошибка в дате");
-                        return null;
                     }
                 }
             }
         } catch (ParseException e) {
             System.out.println("Ошибка при вводе даты");
-            return null;
         }
         return resDate;
     }
 
     private static String getTel(String[] els) { // Проверяем номер телефона:
         String resTel = "";
-        try {
-            for (String el : els) {
-                if (el.length() == 11 && el.matches("[0-9]+")) {
-                    parseInt(el);
-                    resTel = el;
-                } else if (el.length() != 11 && el.matches("[0-9]+")) {
-                    parseInt(el);
-                    resTel = el;
-                    System.out.println("Номер телефона возможно введён с ошибкой.");
-                }
+        for (String el : els) {
+            if (el.length() == 11 && el.matches("[0-9]+")) {
+                //Integer.parseInt(el);
+                resTel = el;
+            } else if (el.length() != 11 && el.matches("[0-9]+")) {
+                //Integer.parseInt(el);
+                resTel = el;
+                System.out.println("Номер телефона возможно введён с ошибкой.");
             }
-        } catch (NumberFormatException e) {
-            System.out.println("Номер телефона введён с ошибкой.");
         }
         return resTel;
     }
