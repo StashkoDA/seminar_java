@@ -53,7 +53,7 @@ public class DZ_Notebook {
         int count = 6;
         try {
             for (String el: els) {
-                if (el != "") {
+                if (el.equals("")) {
                     count--;
                     if (count == 0) {
                         FileWriter fileWriter = new FileWriter((name.split(" "))[0] + ".txt");
@@ -62,18 +62,14 @@ public class DZ_Notebook {
                         System.out.println("Данные успешно сохранены в файле " + (name.split(" "))[0] + ".txt");
                     }
                 }
-                if (el == null) {
-//                    FileWriter fileWriter = new FileWriter((el.split(" "))[0] + ".aaa");
-//                    fileWriter.write(output);
-//                    fileWriter.close();
+                if (!el.equals("")) {
                     System.out.println("Ошибка! Не удалось создать файл." +
                             "Не все параметры внесены правильно, повторите ввод.");
                     break;
                 }
             }
         } catch (IOException e) {
-            System.out.println("Ошибка! Не удалось создать файл." +
-                    "Не все параметры внесены правильно, повторите ввод.");
+            System.out.println("Ошибка! Не удалось создать файл.");
         }
 
     }
@@ -95,57 +91,6 @@ public class DZ_Notebook {
             }
     }
 
-//    public static String[] errorOptions(String data)  {
-//        String[] els = data.split(" ");
-//        String[] res = new String[6];
-//        SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
-//
-//        Date etalonMin = new Date(1900,01,01);
-//        Date etalonMax = new Date(2023,12,01);
-//
-//        int count = 0;
-//
-//        try {
-//            for (String el : els) {
-//
-//                if (el.matches("^[a-zA-Z]*$")){ // Проверяем ФИО
-//                    res[count] = el;
-//                    count++;
-//                } else if (el.matches("\\d{1,2}\\.\\d{1,2}\\.\\d{4}")) {
-//                    Date elPars = ft.parse(el);
-//                    System.out.println(elPars);
-//                    if ((1900 + elPars.getYear()) >= 1900 && (1900 + elPars.getYear()) <= 2023)
-//                    //(elPars.compareTo(etalonMin) > 0 && elPars.compareTo(etalonMax) < 0)
-//                    { // сравниваем дату с разрешённым диапазоном
-//                        res[3] = el;
-//                    } else {
-//                        System.out.println("Ошибка в дате");
-//                    }
-//                } else if (el.length() == 11 && el.matches("[0-9]+")) { // Проверяем номер телефона:
-//                    parseInt(el);
-//                    res[4] = el;
-//                } else if (el.length() != 11 && el.matches("[0-9]+")) {
-//                    parseInt(el);
-//                    res[4] = el;
-//                    System.out.println("Номер телефона возможно введён с ошибкой.");
-//                } else if (el.equals("f") || el.equals("m")) {
-//                    res[5] = el;
-//                }else if ((el.length() == 1) && (!el.equals("f")) && !(el.equals("m"))) {
-//                    System.out.println("Введён не правильно гендер");
-//                }
-//            }
-//
-//        } catch (NumberFormatException e) {
-//            System.out.println("Номер телефона введён с ошибкой.");
-//        } catch (ParseException e) {
-//            System.out.println("Ошибка при вводе даты");
-//        }
-//        for (String r: res) { // Печатаю принятые параметры
-//            System.out.print(r + " ");
-//        }
-//        return res;
-//    }
-
     public static String getName (String[] els) { // Проверяем ФИО
         String resName = "";
 
@@ -154,6 +99,16 @@ public class DZ_Notebook {
                 resName += el + " ";
             }
         }
+        try {
+            String[] res = resName.split(" ");
+            String firstName = res[0];
+            String lastName = res[1];
+            String patronymic = res[2];
+        } catch (IndexOutOfBoundsException e) {
+            System.out.println("Ошибка в ФИО.");
+        }
+
+
         return resName;
     }
 
@@ -167,17 +122,24 @@ public class DZ_Notebook {
                 if (el.matches("\\d{1,2}\\.\\d{1,2}\\.\\d{4}")) {
                     Date elPars = ft.parse(el);
                     System.out.println(elPars);
-                    if ((1900 + elPars.getYear()) >= 1900 && (1900 + elPars.getYear()) <= 2023)
+                    // сравниваем дату с разрешённым диапазоном:
+                    if ((1900 + elPars.getYear()) >= 1900 && (1900 + elPars.getYear()) <= 2023 &&
+                            elPars.getMonth() > 0 && elPars.getMonth() < 13 &&
+                            elPars.getDay() > 0 && elPars.getDay() < 32)
                     //(elPars.compareTo(etalonMin) > 0 && elPars.compareTo(etalonMax) < 0)
-                    { // сравниваем дату с разрешённым диапазоном
+                    {
                         resDate = el;
                     } else {
+                        resDate = null;
+                        Date errorPars = ft.parse(resDate);
                         System.out.println("Ошибка в дате");
                     }
                 }
             }
         } catch (ParseException e) {
             System.out.println("Ошибка при вводе даты");
+        } catch (NullPointerException e) {
+            System.out.println("Ошибка при обработке даты");
         }
         return resDate;
     }
