@@ -44,16 +44,15 @@ public class DZ_Notebook {
         String gender = getGender(els);
         String output = name + date + " " + tel + " " + gender;
         getFile(output, name);
-        System.out.println(output);
-//        errorOptions(data);
+        System.out.println("Данные после проверки: " + output);
     }
 
     private static void getFile(String output, String name) {
         String[] els = output.split(" ");
         int count = 6;
         try {
-            for (String el: els) {
-                if (el.equals("")) {
+            for (int i = 0; i < els.length; i++) {
+                if (els[i] != "") {
                     count--;
                     if (count == 0) {
                         FileWriter fileWriter = new FileWriter((name.split(" "))[0] + ".txt");
@@ -62,7 +61,7 @@ public class DZ_Notebook {
                         System.out.println("Данные успешно сохранены в файле " + (name.split(" "))[0] + ".txt");
                     }
                 }
-                if (!el.equals("")) {
+                if (els[i] == "") {
                     System.out.println("Ошибка! Не удалось создать файл." +
                             "Не все параметры внесены правильно, повторите ввод.");
                     break;
@@ -106,6 +105,7 @@ public class DZ_Notebook {
             String patronymic = res[2];
         } catch (IndexOutOfBoundsException e) {
             System.out.println("Ошибка в ФИО.");
+            return " ";
         }
 
 
@@ -115,31 +115,38 @@ public class DZ_Notebook {
     public static String getDate(String[] els) { // Проверяем дату:
         SimpleDateFormat ft = new SimpleDateFormat ("dd.MM.yyyy");
         String resDate = "";
-        Date etalonMin = new Date(1900,01,01);
-        Date etalonMax = new Date(2023,12,01);
+
         try {
             for (String el : els) {
                 if (el.matches("\\d{1,2}\\.\\d{1,2}\\.\\d{4}")) {
-                    Date elPars = ft.parse(el);
-                    System.out.println(elPars);
+                    String[] arrayDate = el.split("\\.");
+                    int year = Integer.parseInt(arrayDate[2]);
+                    int month = Integer.parseInt(arrayDate[1]);
+                    int day = Integer.parseInt(arrayDate[0]);
                     // сравниваем дату с разрешённым диапазоном:
-                    if ((1900 + elPars.getYear()) >= 1900 && (1900 + elPars.getYear()) <= 2023 &&
-                            elPars.getMonth() > 0 && elPars.getMonth() < 13 &&
-                            elPars.getDay() > 0 && elPars.getDay() < 32)
-                    //(elPars.compareTo(etalonMin) > 0 && elPars.compareTo(etalonMax) < 0)
-                    {
-                        resDate = el;
+                    if ( year > 1900 && year < 2024 && month > 0 && month < 13 && day > 0 && day < 32) {
+                        if (day < 32 && (month == 1 || month == 3 || month == 5 || month == 7 ||
+                                month == 8 || month == 10 || month == 12)) {
+                            resDate = el;
+                        } else if (day < 31 && (month == 4 || month == 6 || month == 9 || month == 11)) {
+                            resDate = el;
+                        } else if (day < 30 && month == 2) {
+                            resDate = el;
+                        } else {
+                            resDate = "";
+                            Date errorPars = ft.parse(resDate);
+                        }
                     } else {
-                        resDate = null;
+                        resDate = "";
                         Date errorPars = ft.parse(resDate);
-                        System.out.println("Ошибка в дате");
                     }
                 }
             }
+
         } catch (ParseException e) {
             System.out.println("Ошибка при вводе даты");
         } catch (NullPointerException e) {
-            System.out.println("Ошибка при обработке даты");
+            System.out.println("Ошибка в дате");
         }
         return resDate;
     }
@@ -149,13 +156,14 @@ public class DZ_Notebook {
         for (String el : els) {
             if (el.length() == 11 && el.matches("[0-9]+")) {
                 //Integer.parseInt(el);
-                resTel = el;
+                return el;
             } else if (el.length() != 11 && el.matches("[0-9]+")) {
                 //Integer.parseInt(el);
-                resTel = el;
-                System.out.println("Номер телефона возможно введён с ошибкой.");
+                System.out.println("Номер телефона, возможно, введён с ошибкой.");
+                return el;
             }
         }
+        System.out.println("Номер телефона введён с ошибкой.");
         return resTel;
     }
 
@@ -166,7 +174,7 @@ public class DZ_Notebook {
                     resGender = el;
                 }else if ((el.length() == 1) && (!el.equals("f")) && !(el.equals("m"))) {
                     System.out.println("Введён не правильно гендер");
-                    return null;
+                    return resGender;
                 }
             }
         return resGender;
