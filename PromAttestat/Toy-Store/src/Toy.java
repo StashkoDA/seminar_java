@@ -4,8 +4,8 @@
 class Toy {
     private int id;
     private String name;
-    private int quantity; // Количество
-    private double weight;
+    private int quantity; // Количество, шт
+    private double weight; // Частота выпадения игрушки (вес, %)
 
     public Toy(int id, String name, int quantity, double weight) {
         this.id = id;
@@ -37,7 +37,7 @@ class Toy {
 
     @Override
     public String toString() {
-        return "ID: " + id + ", Name: " + name + ", Quantity: " + quantity + ", Weight: " + weight + "%";
+        return "ID: " + id + ", Название: " + name + ", Доступно, шт: " + quantity + ", Вес, %: " + weight;
     }
 
     public int getId() {

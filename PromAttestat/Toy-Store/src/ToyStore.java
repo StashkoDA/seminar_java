@@ -47,8 +47,10 @@ class ToyStore {
         }
 
         Random random = new Random();
+        System.out.println(prizeToys.size());
         Toy prizeToy = prizeToys.remove(random.nextInt(prizeToys.size()));
         prizeToy.decreaseQuantity();
+        System.out.println(prizeToys.size());
 
         try {
             FileWriter writer = new FileWriter("prize_toys.txt", true);
